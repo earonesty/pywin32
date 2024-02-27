@@ -1,6 +1,7 @@
 import sys
 
-from xml.sax import make_parser, handler
+from xml.sax import handler
+import defusedxml.sax
 
 class categoryHandler(handler.ContentHandler):
     def __init__(self):
@@ -59,7 +60,7 @@ class Item:
         self.__dict__.update(attrs)
 
 def GetDocument(fname="pywin32-document.xml"):
-    parser = make_parser()
+    parser = defusedxml.sax.make_parser()
     handler=categoryHandler()
     parser.setContentHandler(handler)
     parser.parse(fname)
